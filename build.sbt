@@ -26,12 +26,11 @@ lazy val client = (project in file("client"))
     scalaJSUseMainModuleInitializer := true,
     libraryDependencies ++= Seq(
       "org.scala-js"      %%% "scalajs-dom"   % "1.1.0",
-//      "in.nvilla"         %%% "monadic-html"  % "0.4.1",
       "org.querki"        %%% "jquery-facade" % "2.0",
       "com.typesafe.play" %%% "play-json"     % "2.9.2",
-      "tech.sparse"       %%% "trail"         % "0.3.1",
-      "com.raquo"    %%% "laminar"     % "0.13.1",
-      "com.raquo"    %%% "waypoint"    % "0.4.2"
+      "com.lihaoyi"       %%% "upickle"       % "1.4.4",
+      "com.raquo"         %%% "laminar"       % "0.13.1",
+      "com.raquo"         %%% "waypoint"      % "0.4.2"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)

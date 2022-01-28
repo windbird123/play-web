@@ -8,7 +8,7 @@ import javax.inject._
 @Singleton
 class Application @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
-  def index = Action {
+  def index(path: String) = Action {
     Ok(views.html.index("My Title"))
   }
 }
