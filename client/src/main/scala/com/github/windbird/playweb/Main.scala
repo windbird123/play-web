@@ -1,33 +1,35 @@
 package com.github.windbird.playweb
 
-import com.raquo.airstream.web.AjaxEventStream
 import com.raquo.laminar.api.L._
 import org.scalajs.dom
-import org.scalajs.dom.ext.Ajax
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val urlVar       = Var("https://api.zippopotam.us/us/90210")
-    val otherButton  = button("other url", onClick.mapTo("https://jsonplaceholder.typicode.com/todos/2") --> urlVar)
-    val submitButton = button("submit")
-
-    val responseOnClick: EventStream[String] = for {
-      _        <- submitButton.events(onClick)
-      response <- AjaxEventStream.get(url = urlVar.now()).map(_.responseText)
-      // response <- EventStream.fromFuture(Ajax.get(url = urlVar.now()).map(_.responseText))
-    } yield response
+    val selected = Var("NoWay")
 
     val content = div(
-      input(
-        typ := "text",
-        width := "300px",
-        controlled(value <-- urlVar.signal, onInput.mapToValue --> urlVar)
+      cls := "dropdown",
+      button(
+        tpe := "button",
+        cls := "btn btn-primary dropdown-toggle",
+        dataAttr("bs-toggle") := "dropdown",
+        "Dropdown button"
       ),
-      otherButton,
-      submitButton,
-      br(),
-      label("response: "),
-      child.text <-- responseOnClick
+      ul(
+        cls := "dropdown-menu",
+        li(
+          a(cls := "dropdown-item", "Link 1", onClick.mapTo("LINK1") --> selected)
+        ),
+        li(
+          a(cls := "dropdown-item", "Link 2", onClick.mapTo("LINK2") --> selected)
+        ),
+        li(
+          a(cls := "dropdown-item", "Link 3", onClick.mapTo("LINK3") --> selected)
+        )
+      ),
+      div(
+        child.text <-- selected.signal
+      )
     )
 
     val containerNode = dom.document.getElementById("main_content")
