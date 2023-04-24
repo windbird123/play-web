@@ -27,7 +27,7 @@ lazy val client = (project in file("client"))
     libraryDependencies ++= Seq(
       "org.scala-js"      %%% "scalajs-dom" % "2.4.0",
       "com.typesafe.play" %%% "play-json"   % "2.9.2",
-      "com.lihaoyi"       %%% "upickle"     % "1.4.4",
+      "com.lihaoyi"       %%% "upickle"     % "3.1.0",
       "com.raquo"         %%% "laminar"     % "15.0.1",
       "com.raquo"         %%% "waypoint"    % "6.0.0"
     )
