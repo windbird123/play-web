@@ -1,5 +1,5 @@
 ThisBuild / organization := "com.github.windbird"
-ThisBuild / scalaVersion := "2.13.10"
+ThisBuild / scalaVersion := "2.13.12"
 ThisBuild / version := "1.0.0-SNAPSHOT"
 
 lazy val root = (project in file("."))
@@ -13,7 +13,7 @@ lazy val server = (project in file("server"))
     // triggers scalaJSPipeline when using compile or continuous compilation
     Compile / compile := ((Compile / compile) dependsOn scalaJSPipeline).value,
     libraryDependencies ++= Seq(
-      "com.vmunier" %% "scalajs-scripts" % "1.2.0",
+      "com.vmunier" %% "scalajs-scripts" % "1.3.0",
       guice,
       ws
     )
@@ -25,11 +25,11 @@ lazy val client = (project in file("client"))
   .settings(
     scalaJSUseMainModuleInitializer := true,
     libraryDependencies ++= Seq(
-      "org.scala-js"      %%% "scalajs-dom" % "2.4.0",
+      "org.scala-js"      %%% "scalajs-dom" % "2.8.0",
       "com.typesafe.play" %%% "play-json"   % "2.9.2",
-      "com.lihaoyi"       %%% "upickle"     % "3.1.0",
-      "com.raquo"         %%% "laminar"     % "15.0.1",
-      "com.raquo"         %%% "waypoint"    % "6.0.0"
+      "com.lihaoyi"       %%% "upickle"     % "3.1.3",
+      "com.raquo"         %%% "laminar"     % "16.0.0",
+      "com.raquo"         %%% "waypoint"    % "7.0.0"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)
