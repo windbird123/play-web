@@ -11,7 +11,7 @@ import org.scalajs.dom
 trait WebComponent {
   val id: HtmlProp[String] = idAttr
 
-  lazy val typ: HtmlAttr[String] = htmlAttr("class", StringAsIsCodec)
+  lazy val typ: HtmlAttr[String] = htmlAttr("type", StringAsIsCodec)
   lazy val cls: HtmlAttr[String] = htmlAttr("class", StringAsIsCodec)
 
   type Ref <: dom.HTMLElement

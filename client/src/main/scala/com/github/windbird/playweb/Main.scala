@@ -15,7 +15,6 @@ object Main {
         Plotly.newPlot(
           ctx.thisNode.ref,
           js.Array(
-//            PlotData()
             js.Dictionary(
               "x"    -> js.Array("giraffes", "orangutans", "monkeys"),
               "y"    -> js.Array(20, 14, 23),
@@ -61,7 +60,7 @@ object Main {
     )
 
     val content = div(
-//      cls := "container-fluid mt-3",
+      cls := "container-fluid mt-3",
       button,
       titleInput,
       child.text <-- titleVar.signal,
