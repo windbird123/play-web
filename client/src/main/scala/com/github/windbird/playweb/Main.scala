@@ -12,9 +12,10 @@ object Main {
 
     val chart = div(
       onMountCallback(ctx =>
-        js.Dynamic.global.Plotly.newPlot(
+        Plotly.newPlot(
           ctx.thisNode.ref,
           js.Array(
+//            PlotData()
             js.Dictionary(
               "x"    -> js.Array("giraffes", "orangutans", "monkeys"),
               "y"    -> js.Array(20, 14, 23),
@@ -25,7 +26,43 @@ object Main {
       )
     )
 
+//    val chart = div(
+//      onMountCallback(ctx =>
+//        js.Dynamic.global.Plotly.newPlot(
+//          ctx.thisNode.ref,
+//          js.Array(
+//            js.Dictionary(
+//              "x" -> js.Array("giraffes", "orangutans", "monkeys"),
+//              "y" -> js.Array(20, 14, 23),
+//              "type" -> "bar"
+//            )
+//          )
+//        )
+//      )
+//    )
+
+//    val chart = div()
+//    js.Dynamic.global.Plotly.newPlot(
+//      chart.ref,
+//      js.Array(
+//        js.Dictionary(
+//          "x"    -> js.Array("giraffes", "orangutans", "monkeys"),
+//          "y"    -> js.Array(20, 14, 23),
+//          "type" -> "bar"
+//        )
+//      )
+//    )
+
+    val button = Button.of(
+      _ => "WebComponent Button",
+      _ => onClick --> { _ => dom.window.alert("Clicked") },
+      _.typ := "button",
+      _.cls := "btn btn-primary"
+    )
+
     val content = div(
+//      cls := "container-fluid mt-3",
+      button,
       titleInput,
       child.text <-- titleVar.signal,
       chart
