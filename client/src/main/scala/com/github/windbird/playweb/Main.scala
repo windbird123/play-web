@@ -1,11 +1,13 @@
 package com.github.windbird.playweb
 
 import com.github.windbird.playweb.ajax.NetworkRequest
-import com.github.windbird.playweb.component.{Check, InputGroup, Radio, Select, Util}
+import com.github.windbird.playweb.component.{Select, _}
 import com.github.windbird.playweb.facade.PlotlyDemo
 import com.raquo.laminar.api.L._
+import com.raquo.laminar.nodes.ReactiveHtmlElement
 import frontroute._
 import org.scalajs.dom
+import org.scalajs.dom.HTMLInputElement
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -19,10 +21,15 @@ object Main {
       PlotlyDemo.demo
     )
 
-    def blog(url: String): HtmlElement = div(
-      cls := "container mt-3",
-      Blog.demo
-    )
+    def blog(url: String): HtmlElement = {
+      if (url.nonEmpty)
+        Blog.urlVar.update(_ => url)
+
+      div(
+        cls := "container mt-3",
+        Blog.demo
+      )
+    }
 
     val app = div(
       initRouting,
@@ -37,21 +44,18 @@ object Main {
   }
 }
 
-
 object Blog {
-  val urlVar: Var[String] = Var("https://api.zippopotam.us/us/90210")
-  val actionUrlVar: Var[String] = Var("")
-  val responseVar: Var[String] = Var("")
+  val urlVar: Var[String] = Var("")
 
-  def textInput: HtmlElement =
+  val textInput: ReactiveHtmlElement[HTMLInputElement] =
     input(
       typ := "text",
       cls := "form-control",
       onMountFocus,
-      placeholder := "title input"
+      placeholder := "request url"
     )
 
-  def button: HtmlElement =
+  val button: HtmlElement =
     input(
       typ := "button",
       cls := "btn btn-primary",
@@ -61,20 +65,31 @@ object Blog {
   val inputGroup: HtmlElement = div(
     cls := "input-group mb-3",
     textInput.amend(
-      value <-- urlVar,
-      onInput.mapToValue --> urlVar
+      value <-- urlVar
     ),
     button.amend(
-      // https://laminar.dev/documentation#network-requests
-      onClick.flatMap(_ => FetchStream.get(urlVar.now())) --> responseVar
+      onClick --> { _ => urlVar.update(_ => textInput.ref.value) }
     )
   )
 
   def demo: HtmlElement =
     div(
       Util.summary("Ajax Request", None),
-      div("another: https://jsonplaceholder.typicode.com/todos/2", cls := "mb-1"),
+      a(
+        "request: https://api.zippopotam.us/us/90210",
+        href := "/blog?url=https%3A%2F%2Fapi.zippopotam.us%2Fus%2F90210",
+        display := "block"
+      ),
+      a(
+        "request: https://jsonplaceholder.typicode.com/todos/2",
+        href := "/blog?url=https%3A%2F%2Fjsonplaceholder.typicode.com%2Ftodos%2F2",
+        display := "block"
+      ),
       inputGroup,
-      div(child.text <-- responseVar.signal)
+      div(child.text <-- urlVar.signal.flatMap { url =>
+        // https://laminar.dev/documentation#network-requests
+        if (url.nonEmpty) FetchStream.get(url)
+        else EventStream.fromValue("")
+      })
     )
 }
