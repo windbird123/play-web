@@ -29,7 +29,8 @@ lazy val client = (project in file("client"))
       "com.typesafe.play" %%% "play-json"   % "2.9.2",
       "com.lihaoyi"       %%% "upickle"     % "3.1.3",
       "com.raquo"         %%% "laminar"     % "16.0.0",
-      "com.raquo"         %%% "waypoint"    % "7.0.0"
+      "com.raquo"         %%% "waypoint"    % "7.0.0",
+      "io.frontroute"     %%% "frontroute"  % "0.18.1"
     )
   )
   .enablePlugins(ScalaJSPlugin, ScalaJSWeb)

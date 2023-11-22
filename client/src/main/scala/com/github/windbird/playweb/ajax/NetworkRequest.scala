@@ -1,7 +1,6 @@
 package com.github.windbird.playweb.ajax
 import com.github.windbird.playweb.component.Util
 import com.raquo.laminar.api.L._
-import org.scalajs.dom.MouseEvent
 
 object NetworkRequest {
   val urlVar: Var[String]      = Var("https://api.zippopotam.us/us/90210")
@@ -37,7 +36,7 @@ object NetworkRequest {
   def demo: HtmlElement =
     div(
       Util.summary("Ajax Request", None),
-      div("another: https://jsonplaceholder.typicode.com/todos/2", cls:="mb-1"),
+      div("another: https://jsonplaceholder.typicode.com/todos/2", cls := "mb-1"),
       inputGroup,
       div(child.text <-- responseVar.signal)
     )
