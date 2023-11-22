@@ -7,12 +7,39 @@ import scala.scalajs.js
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val titleVar: Var[String] = Var("bar chart")
-    val titleInput: Component = InputText(textVar = titleVar, name = "My Title", description = "title input")
+    val titleVar: Var[String]  = Var("bar chart")
+    val submitVar: Var[String] = Var("")
+
+    def textInput: HtmlElement =
+      input(
+        typ := "text",
+        cls := "form-control",
+        onMountFocus,
+        placeholder := "title input"
+      )
+
+    def button: HtmlElement =
+      input(
+        typ := "button",
+        cls := "btn btn-primary",
+        defaultValue := "Submit"
+      )
+
+    val inputGroup = div(
+      cls := "input-group mb-3",
+      span(cls := "input-group-text", "@"),
+      textInput.amend(
+        value <-- titleVar,
+        onInput.mapToValue --> titleVar
+      ),
+      button.amend(
+        onClick --> { _ => submitVar.update(_ => titleVar.now()) }
+      )
+    )
 
     val chart = div(
       onMountCallback(ctx =>
-        Plotly.newPlot(
+        Plotly.newPlot( // js.Dynamic.global.Plotly.newPlot(...) for dynamic
           ctx.thisNode.ref,
           js.Array(
             js.Dictionary(
@@ -25,45 +52,11 @@ object Main {
       )
     )
 
-//    val chart = div(
-//      onMountCallback(ctx =>
-//        js.Dynamic.global.Plotly.newPlot(
-//          ctx.thisNode.ref,
-//          js.Array(
-//            js.Dictionary(
-//              "x" -> js.Array("giraffes", "orangutans", "monkeys"),
-//              "y" -> js.Array(20, 14, 23),
-//              "type" -> "bar"
-//            )
-//          )
-//        )
-//      )
-//    )
-
-//    val chart = div()
-//    js.Dynamic.global.Plotly.newPlot(
-//      chart.ref,
-//      js.Array(
-//        js.Dictionary(
-//          "x"    -> js.Array("giraffes", "orangutans", "monkeys"),
-//          "y"    -> js.Array(20, 14, 23),
-//          "type" -> "bar"
-//        )
-//      )
-//    )
-
-    val button = Button.of(
-      _ => "WebComponent Button",
-      _ => onClick --> { _ => dom.window.alert("Clicked") },
-      _.typ := "button",
-      _.cls := "btn btn-primary"
-    )
-
     val content = div(
       cls := "container-fluid mt-3",
-      button,
-      titleInput,
-      child.text <-- titleVar.signal,
+      inputGroup,
+      div(child.text <-- titleVar.signal),
+      div(child.text <-- submitVar.signal),
       chart
     )
 
