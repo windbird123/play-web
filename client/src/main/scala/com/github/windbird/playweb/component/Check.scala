@@ -1,10 +1,13 @@
 package com.github.windbird.playweb.component
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
+import com.raquo.laminar.nodes.ReactiveHtmlElement
+import org.scalajs.dom.HTMLDivElement
 
 object Check {
   val checkedVar: Var[Boolean] = Var(false)
 
-  def checkInput(name: String): HtmlElement =
+  def checkInput(name: String): ReactiveHtmlElement[HTMLDivElement] =
     div(
       cls := "form-check",
       input(
@@ -17,9 +20,10 @@ object Check {
       )
     )
 
-  val checkBox: HtmlElement = checkInput("my boolean checkbox").amend(onInput.mapToChecked --> checkedVar)
+  val checkBox: ReactiveHtmlElement[HTMLDivElement] =
+    checkInput("my boolean checkbox").amend(onInput.mapToChecked --> checkedVar)
 
-  def demo: HtmlElement =
+  def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("Check", Some("https://getbootstrap.com/docs/5.3/forms/checks-radios/")),
       checkBox,

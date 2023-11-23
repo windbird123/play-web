@@ -1,5 +1,6 @@
 package com.github.windbird.playweb.ajax
-import com.github.windbird.playweb.component.Util
+
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
 
 object NetworkRequest {

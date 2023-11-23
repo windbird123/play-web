@@ -1,10 +1,10 @@
 package com.github.windbird.playweb.blog
 
-import com.github.windbird.playweb.component._
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
 import com.raquo.laminar.nodes.ReactiveHtmlElement
 import frontroute.BrowserNavigation
-import org.scalajs.dom.HTMLInputElement
+import org.scalajs.dom.{HTMLDivElement, HTMLInputElement}
 
 import scala.scalajs.js.URIUtils
 
@@ -19,7 +19,7 @@ object BlogDemo {
       placeholder := "request url"
     )
 
-  val button: HtmlElement =
+  val button: ReactiveHtmlElement[HTMLInputElement] =
     input(
       typ := "button",
       cls := "btn btn-primary",
@@ -32,7 +32,7 @@ object BlogDemo {
     BrowserNavigation.pushState(url = s"/blog?url=${URIUtils.encodeURI(requestUrl)}")
   }
 
-  val inputGroup: HtmlElement = div(
+  val inputGroup: ReactiveHtmlElement[HTMLDivElement] = div(
     cls := "input-group mb-3",
     textInput.amend(
       value <-- urlVar
@@ -45,9 +45,16 @@ object BlogDemo {
     )
   )
 
-  def demo: HtmlElement =
+  def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("Routing Demo", None),
+      p(
+        cls := "lead",
+        """http://localhost:9000/blog?url=https%3A%2F%2Fapi.zippopotam.us%2Fus%2F90210 처럼 요청을 하면, input form 에
+          |url param 으로 지정된 값이 채워지고, 요청된 결과까지 화면에 보여준다.
+          |(자동으로 submit 버튼을 누른 것과 같은 효과)
+          |""".stripMargin
+      ),
       a(
         "request: https://api.zippopotam.us/us/90210",
         href := "/blog?url=https%3A%2F%2Fapi.zippopotam.us%2Fus%2F90210",

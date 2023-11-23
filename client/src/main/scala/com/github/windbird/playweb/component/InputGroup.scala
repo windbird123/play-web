@@ -1,12 +1,15 @@
 package com.github.windbird.playweb.component
 
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
+import com.raquo.laminar.nodes.ReactiveHtmlElement
+import org.scalajs.dom.{HTMLDivElement, HTMLInputElement}
 
 object InputGroup {
   val titleVar: Var[String]  = Var("bar chart")
   val submitVar: Var[String] = Var("")
 
-  def textInput: HtmlElement =
+  def textInput: ReactiveHtmlElement[HTMLInputElement] =
     input(
       typ := "text",
       cls := "form-control",
@@ -14,14 +17,14 @@ object InputGroup {
       placeholder := "title input"
     )
 
-  def button: HtmlElement =
+  def button: ReactiveHtmlElement[HTMLInputElement] =
     input(
       typ := "button",
       cls := "btn btn-primary",
       defaultValue := "Submit"
     )
 
-  val inputGroup: HtmlElement = div(
+  val inputGroup: ReactiveHtmlElement[HTMLDivElement] = div(
     cls := "input-group mb-3",
     span(cls := "input-group-text", "@"),
     textInput.amend(
@@ -33,7 +36,7 @@ object InputGroup {
     )
   )
 
-  def demo: HtmlElement =
+  def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("TextInput, Button", Some("https://getbootstrap.com/docs/5.3/forms/input-group/")),
       inputGroup,

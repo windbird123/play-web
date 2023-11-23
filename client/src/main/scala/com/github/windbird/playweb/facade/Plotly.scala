@@ -1,7 +1,9 @@
 package com.github.windbird.playweb.facade
 
-import com.github.windbird.playweb.component.Util
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
+import com.raquo.laminar.nodes.ReactiveHtmlElement
+import org.scalajs.dom.HTMLDivElement
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSGlobal
@@ -18,7 +20,7 @@ object Plotly extends js.Object {
 }
 
 object PlotlyDemo {
-  val chart: HtmlElement = div(
+  val chart: ReactiveHtmlElement[HTMLDivElement] = div(
     onMountCallback(ctx =>
       Plotly.newPlot( // js.Dynamic.global.Plotly.newPlot(...) for dynamic
         ctx.thisNode.ref,
@@ -33,7 +35,7 @@ object PlotlyDemo {
     )
   )
 
-  def demo: HtmlElement =
+  def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("Plotly Graph", None),
       chart

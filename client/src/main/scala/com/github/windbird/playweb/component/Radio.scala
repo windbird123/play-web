@@ -1,11 +1,14 @@
 package com.github.windbird.playweb.component
 
+import com.github.windbird.playweb.Util
 import com.raquo.laminar.api.L._
+import com.raquo.laminar.nodes.ReactiveHtmlElement
+import org.scalajs.dom.HTMLDivElement
 
 object Radio {
   val radioVar: Var[String] = Var("2")
 
-  def radioBox(opts: Seq[(String, String)]): HtmlElement =
+  def radioBox(opts: Seq[(String, String)]): ReactiveHtmlElement[HTMLDivElement] =
     div(
       opts.map {
         case (name, value) =>
@@ -25,7 +28,7 @@ object Radio {
       }.toList
     )
 
-  def demo: HtmlElement =
+  def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("Radio", Some("https://getbootstrap.com/docs/5.3/forms/checks-radios/")),
       radioBox(List("One" -> "1", "Two" -> "2", "Three" -> "3")),

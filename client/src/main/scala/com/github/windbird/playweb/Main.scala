@@ -2,6 +2,7 @@ package com.github.windbird.playweb
 
 import com.github.windbird.playweb.blog.BlogDemo
 import com.github.windbird.playweb.component._
+import com.github.windbird.playweb.facade.FacadeDemo
 import com.github.windbird.playweb.home.HomeDemo
 import com.raquo.laminar.api.L._
 import frontroute._
@@ -19,12 +20,13 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val app = div(
-      initRouting,
-      pathEnd(HomeDemo.demo),
-      path("component")(ComponentDemo.demo),
-      (path("blog") & maybeParam("url")) { urlOpt =>
+      initRouting,  // routing 을 위해 반드시 포함되어야 함
+      pathEnd(HomeDemo.demo), // home
+      path("component")(ComponentDemo.demo),  // component
+      (path("blog") & maybeParam("url")) { urlOpt =>  // blog
         blog(urlOpt.getOrElse(""))
-      }
+      },
+      path("facade")(FacadeDemo.demo) // facade
     )
 
     val containerNode = dom.document.getElementById("main_content")
