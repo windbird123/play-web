@@ -4,7 +4,7 @@ import com.raquo.laminar.api.L._
 object Select {
   val selectedVar: Var[String] = Var("1")
 
-  def selectBox(opts: Map[String, String]): HtmlElement =
+  def selectBox(opts: Seq[(String, String)]): HtmlElement =
     select(
       cls := "form-select",
       opts.map {
@@ -13,7 +13,7 @@ object Select {
     )
 
   val selectStep: HtmlElement =
-    selectBox(Map("One" -> "1", "Two" -> "2", "Three" -> "3")).amend(onChange.mapToValue --> selectedVar)
+    selectBox(List("One" -> "1", "Two" -> "2", "Three" -> "3")).amend(onChange.mapToValue --> selectedVar)
 
   def demo: HtmlElement       =
     div(

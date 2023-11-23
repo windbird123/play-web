@@ -1,4 +1,4 @@
-package com.github.windbird.playweb
+package com.github.windbird.playweb.blog
 
 import com.github.windbird.playweb.component._
 import com.raquo.laminar.api.L._
@@ -8,7 +8,7 @@ import org.scalajs.dom.HTMLInputElement
 
 import scala.scalajs.js.URIUtils
 
-object Blog {
+object BlogDemo {
   val urlVar: Var[String] = Var("")
 
   val textInput: ReactiveHtmlElement[HTMLInputElement] =

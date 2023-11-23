@@ -3,9 +3,9 @@ package com.github.windbird.playweb.component
 import com.raquo.laminar.api.L._
 
 object Radio {
-  val radioVar: Var[Int] = Var(2)
+  val radioVar: Var[String] = Var("2")
 
-  def radioBox(opts: Map[String, Int]): HtmlElement =
+  def radioBox(opts: Seq[(String, String)]): HtmlElement =
     div(
       opts.map {
         case (name, value) =>
@@ -28,7 +28,7 @@ object Radio {
   def demo: HtmlElement =
     div(
       Util.summary("Radio", Some("https://getbootstrap.com/docs/5.3/forms/checks-radios/")),
-      radioBox(Map("One" -> 1, "Two" -> 2, "Three" -> 3)),
-      child.text <-- radioVar.signal.map(_.toString)
+      radioBox(List("One" -> "1", "Two" -> "2", "Three" -> "3")),
+      child.text <-- radioVar.signal
     )
 }
