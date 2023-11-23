@@ -3,7 +3,10 @@ package com.github.windbird.playweb
 import com.github.windbird.playweb.component._
 import com.raquo.laminar.api.L._
 import com.raquo.laminar.nodes.ReactiveHtmlElement
+import frontroute.BrowserNavigation
 import org.scalajs.dom.HTMLInputElement
+
+import scala.scalajs.js.URIUtils
 
 object Blog {
   val urlVar: Var[String] = Var("")
@@ -23,13 +26,22 @@ object Blog {
       defaultValue := "Submit"
     )
 
+  // Browser URL 관련 모든 Var 들 값을 확인해 업데이트 한다.
+  def updateBrowserUrl(): Unit = {
+    val requestUrl = urlVar.now()
+    BrowserNavigation.pushState(url = s"/blog?url=${URIUtils.encodeURI(requestUrl)}")
+  }
+
   val inputGroup: HtmlElement = div(
     cls := "input-group mb-3",
     textInput.amend(
       value <-- urlVar
     ),
     button.amend(
-      onClick --> { _ => urlVar.update(_ => textInput.ref.value) }
+      onClick --> { _ =>
+        urlVar.update(_ => textInput.ref.value)
+        updateBrowserUrl()
+      }
     )
   )
 
