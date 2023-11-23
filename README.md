@@ -9,7 +9,9 @@ https://github.com/vmunier/play-scalajs.g8 템플릿을 사용해 web UI 를 개
 
 ## fly.io 배포
 개인 Local PC 에서 Dockerfile 로 이미지를 만들 수 있는 준비되어야 `fly` command 로 배포할 수 있다.
-* Local PC 에서 sbt build
+* Local PC 에서 sbt build  
+  `java-11` 과 `sbt` 가 설치되어 있어야 한다.
+
   ```shell
   sbt server/clean server/stage
   
