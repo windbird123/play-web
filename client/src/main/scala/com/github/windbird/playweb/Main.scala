@@ -8,16 +8,16 @@ import frontroute._
 import org.scalajs.dom
 
 object Main {
+  def blog(url: String): HtmlElement = {
+    if (url.nonEmpty) BlogDemo.urlVar.update(_ => url)
+
+    div(
+      cls := "container mt-3",
+      BlogDemo.demo
+    )
+  }
+
   def main(args: Array[String]): Unit = {
-    def blog(url: String): HtmlElement = {
-      if (url.nonEmpty) BlogDemo.urlVar.update(_ => url)
-
-      div(
-        cls := "container mt-3",
-        BlogDemo.demo
-      )
-    }
-
     val app = div(
       initRouting,
       pathEnd(HomeDemo.demo),
