@@ -66,7 +66,7 @@ object SortableDemo {
   }
 
   val demo: ReactiveHtmlElement[HTMLDivElement] = div(
-    Util.summary("Sortable Drag&Drop", None),
+    Util.summary("Sortable.js Drag&Drop", None),
     child.text <-- state.signal.map(sorted => "Sorted: " + sorted.mkString(" -> ")),
     targetList,
     onMountCallback(_ =>

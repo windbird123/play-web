@@ -19,4 +19,4 @@ ENTRYPOINT /app/bin/server \
     -Dhttp.port=8080
 
 # docker build --tag demo .
-# docker run --rm -p 9000:8080 demo
+# docker run --rm -p 8080:8080 demo

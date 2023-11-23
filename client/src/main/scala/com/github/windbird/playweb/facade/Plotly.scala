@@ -37,7 +37,7 @@ object PlotlyDemo {
 
   def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
-      Util.summary("Plotly Graph", None),
+      Util.summary("Plotly.js Graph", None),
       chart
     )
 }
