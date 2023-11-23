@@ -7,6 +7,7 @@ import org.scalajs.dom.HTMLDivElement
 object FacadeDemo {
   val demo: ReactiveHtmlElement[HTMLDivElement] = div(
     cls := "container-fluid mt-3",
-    PlotlyDemo.demo
+    PlotlyDemo.demo,
+    SortableDemo.demo
   )
 }

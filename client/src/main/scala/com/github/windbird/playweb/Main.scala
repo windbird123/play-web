@@ -20,13 +20,13 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val app = div(
-      initRouting,  // routing 을 위해 반드시 포함되어야 함
-      pathEnd(HomeDemo.demo), // home
-      path("component")(ComponentDemo.demo),  // component
-      (path("blog") & maybeParam("url")) { urlOpt =>  // blog
+      initRouting,                           // routing 을 위해 반드시 포함되어야 함
+      pathEnd(HomeDemo.demo),                // home
+      path("component")(ComponentDemo.demo), // component
+      (path("blog") & maybeParam("url")) { urlOpt => // blog
         blog(urlOpt.getOrElse(""))
       },
-      path("facade")(FacadeDemo.demo) // facade
+      path("facade")(FacadeDemo.demo)        // facade
     )
 
     val containerNode = dom.document.getElementById("main_content")
