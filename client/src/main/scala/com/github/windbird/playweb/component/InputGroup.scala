@@ -17,12 +17,14 @@ object InputGroup {
       placeholder := "title input"
     )
 
-  def button: ReactiveHtmlElement[HTMLInputElement] =
+  val plainButton: ReactiveHtmlElement[HTMLInputElement] =
     input(
       typ := "button",
       cls := "btn btn-primary",
       defaultValue := "Submit"
     )
+
+  val spinnerButton = SpinnerButton("SpinnerSubmit")
 
   val inputGroup: ReactiveHtmlElement[HTMLDivElement] = div(
     cls := "input-group mb-3",
@@ -31,8 +33,15 @@ object InputGroup {
       value <-- titleVar,
       onInput.mapToValue --> titleVar
     ),
-    button.amend(
+    plainButton.amend(
       onClick --> { _ => submitVar.update(_ => titleVar.now()) }
+    ),
+    spinnerButton.amend(
+      onClick --> { _ => spinnerButton.run() },
+      onClick.compose(_.delay(2000)) --> { _ => // event 를 지연시켜 2초 뒤에 결과가 노출 되도록 함
+        submitVar.update(_ => titleVar.now())
+        spinnerButton.stop()
+      }
     )
   )
 
