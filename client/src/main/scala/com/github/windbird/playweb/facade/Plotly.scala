@@ -38,6 +38,7 @@ object PlotlyDemo {
   def demo: ReactiveHtmlElement[HTMLDivElement] =
     div(
       Util.summary("Plotly.js Graph", None),
+      a("plotly.js", href := "https://plotly.com/javascript/", target := "_blank", display := "block"),
       chart
     )
 }
