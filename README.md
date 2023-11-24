@@ -1,5 +1,6 @@
 ## 개요
 https://github.com/vmunier/play-scalajs.g8 템플릿을 사용해 web UI 를 개발해 본다.
+개발에 대한 설명은 https://wefree.tistory.com/324 블로그에서 확인할 수 있다.
 
 ## Tech Stack
 * [playframework-2.8.19](https://www.playframework.com/)
