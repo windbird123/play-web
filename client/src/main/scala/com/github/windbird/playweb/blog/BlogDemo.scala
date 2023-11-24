@@ -50,7 +50,7 @@ object BlogDemo {
       Util.summary("Routing Demo", None),
       p(
         cls := "lead",
-        """http://localhost:9000/blog?url=https%3A%2F%2Fapi.zippopotam.us%2Fus%2F90210 처럼 요청을 하면, input form 에
+        """https://wefree-scalajs.fly.dev/blog?url=https%3A%2F%2Fapi.zippopotam.us%2Fus%2F90210 처럼 요청 하면, input form 에
           |url param 으로 지정된 값이 채워지고, 요청된 결과까지 화면에 보여준다.
           |(자동으로 submit 버튼을 누른 것과 같은 효과)
           |""".stripMargin
