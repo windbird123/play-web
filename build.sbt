@@ -26,10 +26,9 @@ lazy val client = (project in file("client"))
     scalaJSUseMainModuleInitializer := true,
     libraryDependencies ++= Seq(
       "org.scala-js"      %%% "scalajs-dom" % "2.8.0",
-      "com.typesafe.play" %%% "play-json"   % "2.9.2",
+      "org.playframework" %%% "play-json"   % "3.0.0",
       "com.lihaoyi"       %%% "upickle"     % "3.1.3",
       "com.raquo"         %%% "laminar"     % "16.0.0",
-      "com.raquo"         %%% "waypoint"    % "7.0.0",
       "io.frontroute"     %%% "frontroute"  % "0.18.1"
     )
   )
